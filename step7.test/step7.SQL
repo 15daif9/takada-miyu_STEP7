@@ -27,7 +27,6 @@ FROM `users` JOIN `products` ON products.id = order_items.product_id
 JOIN `order_items` ON users.id = order_items.order_id
 WHERE (products.price * order_items.quantity) 
 = (SELECT MAX(products.price * order_items.quantity) FROM `users`);
-    -- わかりませんでした
 -- 10
 SELECT products.product_name AS `商品名`, SUM(order_items.quantity) AS `売れた台数`
 FROM `products` JOIN `order_items` ON products.id = order_items.order_id
@@ -37,7 +36,9 @@ SELECT users.name FROM `users`
 JOIN `orders` ON users.id = orders.user_id
 WHERE orders.id IS NULL;
 -- 12
-    -- わかりませんでした
+SELECT orders.id FROM orders
+JOIN users ON orders.user_id = users.id
+JOIN order_items ON order_items.order_id = users.id;
 -- 13
 SELECT users.name FROM `users`
 JOIN `order_items` ON `users`.id = `order_items`.order_id
@@ -55,7 +56,7 @@ SELECT products.product_name FROM products
 JOIN order_items ON products.product_name = order_items.product_id
 WHERE products.product_name = (SELECT MAX(order_items.quantity) FROM products);
 -- 16
-    -- わかりませんでした
+SELECT orders.order_date,
 -- 17
 SELECT order_items.product_id FROM order_items
 WHERE order_items.product_id IN (1, 2, 3, 4, 5) IS NULL;
@@ -67,7 +68,8 @@ FROM `users`
 JOIN `order_items` ON users.id = order_items.order_id
 JOIN products ON products.id = order_items.order_id;
 -- 20
-    -- わかりませんでした
+ SELECT orders.order_date, users.name
+ FROM users JOIN orders ON users.name = orders.order_date;
 -- 21
 INSERT INTO users (id,name,age,gender,created_at)VALUES
 (6,'中村愛',25,'female','2025-06-01');
@@ -88,4 +90,4 @@ DELETE FROM users WHERE id = 5;
 -- 29
 DELETE FROM order_items WHERE id = 5;
 -- 30
-DELETE FROM products WHERE -- わかりませんでした
+DELETE FROM products WHERE 
